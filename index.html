@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Ahmed Faraz Malik, a BS IT student specializing in AI-powered web and data solutions. Explore projects, skills, and contact details.">
+  <meta name="keywords" content="Ahmed Faraz Malik, portfolio, web developer, data science, AI, Python, JavaScript, PHP, MySQL">
+  <meta name="author" content="Ahmed Faraz Malik">
   <title>Ahmed Faraz Malik - Portfolio</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -10,17 +13,51 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <!-- Font Awesome for Contact Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Google Fonts: Inter and Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-yellow: #facc15;
+      --dark-bg: #171717;
+      --card-bg: #262626;
+      --text-color: #ffffff;
+    }
     body {
-      background: #1a1a1a;
-      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-color);
       overflow-x: hidden;
       position: relative;
     }
-    /* Portfolio Background Animation */
+    .light-mode {
+      --dark-bg: #ffffff;
+      --card-bg: #f3f4f6;
+      --text-color: #000000;
+    }
+    .light-mode .profile-container,
+    .light-mode .skill-item,
+    .light-mode .project-item {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 50;
+      background: var(--card-bg);
+      border: 2px solid var(--primary-yellow);
+      border-radius: 50%;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+    .theme-toggle i {
+      color: var(--primary-yellow);
+    }
     #background-animation {
       position: fixed;
       top: 0;
@@ -29,45 +66,61 @@
       height: 100%;
       z-index: -1;
       pointer-events: none;
+      opacity: 0.8;
+    }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-yellow);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
+    }
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-yellow);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
     .my-image {
-      animation: image-pop 1.5s ease-in-out forwards;
-      border: 5px solid #eab308;
-      box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+      border: 4px solid var(--primary-yellow);
+      box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
       object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    @keyframes image-pop {
-      0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
-      60% { transform: scale(1.05) rotate(3deg); }
-      100% { opacity: 1; transform: scale(1) rotate(0); }
+    .my-image:hover {
+      transform: scale(1.27);
+      box-shadow: 0 0 25px rgba(250, 204, 21, 0.7);
     }
     .my-name {
       position: relative;
       display: inline-block;
       transition: transform 0.3s ease;
+      color: var(--primary-yellow);
     }
     .my-name:hover {
-      transform: scale(1.05);
-    }
-    .my-name::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(to right, #eab308, transparent);
+      transform: scale(1.03);
     }
     .my-name span {
       display: inline-block;
       opacity: 0;
-      transform: translateX(-20px) rotate(-10deg);
-      animation: letter-slide 1.2s ease-in-out forwards;
+      transform: translateY(20px);
+      animation: letter-rise 0.8s ease-out forwards;
     }
-    @keyframes letter-slide {
-      0% { opacity: 0; transform: translateX(-20px) rotate(-10deg); }
-      60% { transform: translateX(5px) rotate(3deg); }
-      100% { opacity: 1; transform: translateX(0) rotate(0); }
+    @keyframes letter-rise {
+      to { opacity: 1; transform: translateY(0); }
     }
     .my-name span:nth-child(1) { animation-delay: 0.05s; }
     .my-name span:nth-child(2) { animation-delay: 0.1s; }
@@ -86,84 +139,133 @@
     .my-name span:nth-child(15) { animation-delay: 0.75s; }
     .my-name span:nth-child(16) { animation-delay: 0.8s; }
     .my-tagline {
-      animation: fade-slide-up 1s ease-in-out 0.5s forwards;
       opacity: 0;
-      transition: transform 0.3s ease;
-    }
-    .my-tagline:hover {
-      transform: scale(1.05);
-    }
-    @keyframes fade-slide-up {
-      0% { opacity: 0; transform: translateY(20px); }
-      60% { transform: translateY(-5px); }
-      100% { opacity: 1; transform: translateY(0); }
+      transform: translateY(20px);
+      animation: fade-slide-up 1s ease-out 0.5s forwards;
+      color: var(--text-color);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--primary-yellow);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
     }
     .my-about {
-      animation: slide-right 1s ease-in-out 0.7s forwards;
       opacity: 0;
-      transition: transform 0.3s ease;
+      transform: translateY(20px);
+      animation: fade-slide-up 1s ease-out 0.5s forwards;
+      color: var(--text-color);
     }
-    .my-about:hover {
-      transform: scale(1.03);
+    @keyframes fade-slide-up {
+      to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes slide-right {
-      0% { opacity: 0; transform: translateX(20px); }
-      100% { opacity: 1; transform: translateX(0); }
-    }
-    .profile-container {
-      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-      border: 2px solid #eab308;
+    .profile-container, .skill-item, .project-item {
+      background: var(--card-bg);
+      border: 1px solid var(--primary-yellow);
       border-radius: 12px;
       padding: 1.5rem;
-      transition: box-shadow 0.3s ease;
-    }
-    .profile-container:hover {
-      box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
-    }
-    .skill-item, .project-item {
-      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .skill-item:hover, .project-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 30px rgba(234, 179, 8, 0.4);
+    .profile-container:hover, .skill-item:hover, .project-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(250, 204, 21, 0.3);
+    }
+    .progress-bar {
+      background: #3f3f3f;
+      border-radius: 9999px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .light-mode .progress-bar {
+      background: #d1d5db;
+    }
+    .progress-fill {
+      background: var(--primary-yellow);
+      height: 100%;
+      transition: width 1s ease-in-out;
+    }
+    .skill-percentage {
+      color: var(--text-color);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
     }
     .github-btn {
-      transition: all 0.3s ease;
+      background: var(--primary-yellow);
+      color: #1f2937;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .github-btn:hover {
-      background-color: #eab308;
-      transform: scale(1.15);
-      box-shadow: 0 5px 15px rgba(234, 179, 8, 0.6);
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.5);
     }
     .contact-link {
-      transition: all 0.3s ease;
+      position: relative;
+      transition: transform 0.3s ease, color 0.3s ease;
+      color: var(--text-color);
     }
     .contact-link:hover {
-      transform: scale(1.4) rotate(10deg);
-      color: #eab308;
-      filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.7));
+      transform: scale(1.2);
+      color: var(--primary-yellow);
     }
-    /* Navigation Links */
-    .nav-links {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
+    .contact-link::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card-bg);
+      color: var(--text-color);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .contact-link:hover::after {
+      opacity: 1;
     }
     .nav-links a {
-      font-size: 1.2rem;
-      color: white;
+      position: relative;
+      color: var(--text-color);
       transition: color 0.3s ease;
     }
     .nav-links a:hover {
-      color: #eab308;
+      color: var(--primary-yellow);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-yellow);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .project-item p {
+      color: var(--text-color);
+    }
+    .project-item .text-gray-400 {
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+    footer p {
+      color: var(--text-color);
     }
     @media (max-width: 768px) {
       .my-image {
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
       }
       .my-name {
         font-size: 2.5rem;
@@ -172,7 +274,7 @@
         font-size: 1.25rem;
       }
       .my-about {
-        font-size: 1rem;
+        font-size: 0.875rem;
       }
       .nav-links {
         gap: 1rem;
@@ -180,129 +282,191 @@
       .nav-links a {
         font-size: 1rem;
       }
+      .logo {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
-<body>
+<body class="transition-colors duration-300">
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <!-- Background Animation Canvas -->
-  <canvas id="background-animation"></canvas>
+  <canvas id="background-animation" aria-hidden="true"></canvas>
 
-  <!-- Navbar -->
-  <nav class="bg-black bg-opacity-80 w-full">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col items-center">
-      <div class="text-2xl font-bold text-yellow-400 text-center">Welcome to My Portfolio</div>
-      <div class="nav-links">
-        <a href="#hero">Home</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+  <!-- Header -->
+  <header class="bg-black bg-opacity-80 w-full sticky top-0 z-40">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex flex-col items-center">
+      <a href="#hero" class="logo">Welcome to My Space on the Web</a>
+      <div class="nav-links flex flex-row justify-center gap-6 mt-2">
+        <a href="#hero" class="font-semibold">Home</a>
+        <a href="#skills" class="font-semibold">Skills</a>
+        <a href="#projects" class="font-semibold">Projects</a>
+        <a href="#contact" class="font-semibold">Contact</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="min-h-screen flex items-center justify-center px-4">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full">
-      <div class="text-center md:text-left mb-8 md:mb-0 md:pr-8">
-        <h1 class="my-name text-5xl md:text-7xl font-bold text-yellow-400 mb-4">
-          <span>A</span><span>h</span><span>m</span><span>e</span><span>d</span><span> </span>
-          <span>F</span><span>a</span><span>r</span><span>a</span><span>z</span><span> </span>
-          <span>M</span><span>a</span><span>l</span><span>i</span><span>k</span>
-        </h1>
-        <p class="my-tagline text-xl md:text-2xl text-gray-300">AI-Powered Web & Data Innovator</p>
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center px-4">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-8">
+        <div class="text-center md:text-left mb-8 md:mb-0 md:pr-8">
+          <h1 class="my-name text-4xl md:text-6xl font-bold mb-4">
+            <span>A</span><span>h</span><span>m</span><span>e</span><span>d</span><span> </span>
+            <span>F</span><span>a</span><span>r</span><span>a</span><span>z</span><span> </span>
+            <span>M</span><span>a</span><span>l</span><span>i</span><span>k</span>
+          </h1>
+          <p class="my-tagline text-lg md:text-xl mb-4">AI-Powered Web & Data Innovator</p>
+          <p class="my-about text-base md:text-lg max-w-md mx-auto md:mx-0">
+            I'm a BS IT student at NUML University, Islamabad, driven by a passion for creating impactful web and data solutions. My goal is to leverage AI and modern technologies to solve real-world problems, blending creativity with technical expertise. I thrive on learning, experimenting with new tools, and building projects that make a difference.
+          </p>
+        </div>
+        <div class="flex-shrink-0 profile-container text-center">
+          <img src="images/me.jpg" alt="Ahmed Faraz Malik, a BS IT student and developer" class="my-image mx-auto mb-6 rounded-full w-64 h-64 md:w-80 md:h-80">
+        </div>
       </div>
-      <div class="flex-shrink-0 profile-container text-center">
-        <img src="images/me.jpg" alt="Ahmed Faraz Malik" class="my-image mx-auto mb-6 rounded-full w-80 h-80 md:w-[350px] md:h-[350px]">
-        <p class="my-about text-lg text-gray-300 max-w-xs mx-auto">BS IT student at NUML University, Islamabad, passionate about crafting innovative web and data solutions.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="skills py-16 bg-black bg-opacity-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center text-yellow-400 mb-10" data-aos="fade-up">Skills</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="100">
-          <h3 class="text-xl font-bold text-yellow-400">HTML</h3>
-          <p class="text-gray-300">Building clean, accessible web layouts</p>
-        </div>
-        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="200">
-          <h3 class="text-xl font-bold text-yellow-400">CSS</h3>
-          <p class="text-gray-300">Creating stylish, responsive designs</p>
-        </div>
-        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="300">
-          <h3 class="text-xl font-bold text-yellow-400">JavaScript</h3>
-          <p class="text-gray-300">Adding dynamic, interactive features</p>
-        </div>
-        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="400">
-          <h3 class="text-xl font-bold text-yellow-400">SQL</h3>
-          <p class="text-gray-300">Managing databases efficiently</p>
-        </div>
-        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="500">
-          <h3 class="text-xl font-bold text-yellow-400">Python</h3>
-          <p class="text-gray-300">Developing backend and data solutions</p>
-        </div>
-        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="600">
-          <h3 class="text-xl font-bold text-yellow-400">Mobile App Development</h3>
-          <p class="text-gray-300">Beginner in building mobile applications</p>
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-black bg-opacity-50">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12" data-aos="fade-up">Skills</h2>
+        <div class="space-y-12">
+          <!-- Web Development -->
+          <div>
+            <h3 class="text-2xl font-semibold text-yellow-400 mb-6" data-aos="fade-up">Web Development</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="100">
+                <h4 class="text-lg font-semibold text-yellow-400">HTML</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[100%]"></div>
+                </div>
+                <p class="skill-percentage">100%</p>
+              </div>
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="200">
+                <h4 class="text-lg font-semibold text-yellow-400">CSS</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[100%]"></div>
+                </div>
+                <p class="skill-percentage">100%</p>
+              </div>
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="300">
+                <h4 class="text-lg font-semibold text-yellow-400">JavaScript</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[70%]"></div>
+                </div>
+                <p class="skill-percentage">70%</p>
+              </div>
+            </div>
+          </div>
+          <!-- Data & Backend -->
+          <div>
+            <h3 class="text-2xl font-semibold text-yellow-400 mb-6" data-aos="fade-up">Data & Backend</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="100">
+                <h4 class="text-lg font-semibold text-yellow-400">Python</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[90%]"></div>
+                </div>
+                <p class="skill-percentage">90%</p>
+              </div>
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="200">
+                <h4 class="text-lg font-semibold text-yellow-400">SQL</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[85%]"></div>
+                </div>
+                <p class="skill-percentage">85%</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mobile Development -->
+          <div>
+            <h3 class="text-2xl font-semibold text-yellow-400 mb-6" data-aos="fade-up">Mobile Development</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="100">
+                <h4 class="text-lg font-semibold text-yellow-400">Java</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[70%]"></div>
+                </div>
+                <p class="skill-percentage">70%</p>
+              </div>
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="200">
+                <h4 class="text-lg font-semibold text-yellow-400">XML</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[70%]"></div>
+                </div>
+                <p class="skill-percentage">70%</p>
+              </div>
+              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="300">
+                <h4 class="text-lg font-semibold text-yellow-400">Android Studio</h4>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill w-[100%]"></div>
+                </div>
+                <p class="skill-percentage">100%</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects py-16">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center text-yellow-400 mb-10" data-aos="fade-up">Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="project-item p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-2xl font-bold text-yellow-400">Bulkwise Emailer</h3>
-          <p class="text-gray-300 mt-2">Bulk email tool with templates & analytics</p>
-          <a href="https://github.com/faraz721/Bulkwise_Emailer.git" class="github-btn inline-block mt-4 bg-yellow-400 text-black font-bold py-2 px-4 rounded">GitHub</a>
-        </div>
-        <div class="project-item p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-2xl font-bold text-yellow-400">QuickLook AI</h3>
-          <p class="text-gray-300 mt-2">AI-driven data analysis & visualization</p>
-          <a href="https://github.com/faraz721/QuickLook_AI.git" class="github-btn inline-block mt-4 bg-yellow-400 text-black font-bold py-2 px-4 rounded">GitHub</a>
-        </div>
-        <div class="project-item p-6 rounded-lg" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-2xl font-bold text-yellow-400">DonorPoint</h3>
-          <p class="text-gray-300 mt-2">Connecting donors with charities</p>
-          <a href="https://github.com/faraz721/donorpoint.git" class="github-btn inline-block mt-4 bg-yellow-400 text-black font-bold py-2 px-4 rounded">GitHub</a>
+    <!-- Projects Section -->
+    <section id="projects" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12" data-aos="fade-up">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="project-item p-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-2xl font-bold text-yellow-400">DonorPoint</h3>
+            <p class="text-gray-300 mt-2">A simple web app that helps people find nearby blood donors. Users can register, request blood by type, and search donors. Admins can manage users and requests through a separate panel.</p>
+            <p class="text-gray-400 mt-2 text-sm"><strong>Technologies:</strong> HTML, CSS, JavaScript, PHP, MySQL</p>
+            <a href="https://github.com/faraz721/donorpoint.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div class="project-item p-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-2xl font-bold text-yellow-400">QuickLook_AI</h3>
+            <p class="text-gray-300 mt-2">A research tool that shows the top 3 Google search results using the Serper API. It's fast, minimal, and built with a clean Streamlit interface — perfect for quick lookups.</p>
+            <p class="text-gray-400 mt-2 text-sm"><strong>Technologies:</strong> Python, Streamlit, Serper.dev API, requests, python-dotenv</p>
+            <a href="https://github.com/faraz721/QuickLook_AI.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div class="project-item p-6" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="text-2xl font-bold text-yellow-400">BulkWise Emailer</h3>
+            <p class="text-gray-300 mt-2">A desktop app to send customized bulk emails. Users can import a CSV contact list, write a message, and send emails with one click. Simple UI and very handy for campaigns or updates.</p>
+            <p class="text-gray-400 mt-2 text-sm"><strong>Technologies:</strong> Python, Tkinter, smtplib, email, pandas</p>
+            <a href="https://github.com/faraz721/Bulkwise_Emailer.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact py-16 bg-black bg-opacity-50">
-    <div class="max-w-6xl mx-auto px-4 text-center" data-aos="fade-up">
-      <h2 class="text-4xl font-bold text-yellow-400 mb-10">Contact Me</h2>
-      <div class="flex justify-center space-x-8" data-aos="zoom-in" data-aos-delay="100">
-        <!-- Email -->
-        <a href="mailto:721ahmedfarazmalik@gmail.com" class="contact-link text-4xl text-gray-300" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <!-- WhatsApp -->
-        <a href="https://wa.me/923151512720" class="contact-link text-4xl text-gray-300" title="WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/ahmed-faraz-malik-88b635319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-link text-4xl text-gray-300" title="LinkedIn" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <!-- GitHub -->
-        <a href="https://github.com/faraz721" class="contact-link text-4xl text-gray-300" title="GitHub" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-black bg-opacity-50">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-yellow-400 mb-12" data-aos="fade-up">Contact Me</h2>
+        <div class="flex justify-center space-x-12" data-aos="zoom-in" data-aos-delay="100">
+          <a href="mailto:721ahmedfarazmalik@gmail.com" class="contact-link text-3xl" data-tooltip="Email" target="_blank" rel="noopener noreferrer" aria-label="Email Ahmed Faraz Malik">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://wa.me/923151512720" class="contact-link text-3xl" data-tooltip="WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Ahmed Faraz Malik">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/ahmed-faraz-malik-88b635319" class="contact-link text-3xl" data-tooltip="LinkedIn" target="_blank" rel="noopener noreferrer" aria-label="Ahmed Faraz Malik's LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/faraz721" class="contact-link text-3xl" data-tooltip="GitHub" target="_blank" rel="noopener noreferrer" aria-label="Ahmed Faraz Malik's GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="py-6 bg-black bg-opacity-80 text-center">
-    <p class="text-gray-300">© 2025 Ahmed Faraz Malik. All Rights Reserved.</p>
+    <p>© 2025 Ahmed Faraz Malik. All Rights Reserved.</p>
   </footer>
 
   <!-- Scripts -->
@@ -326,10 +490,10 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
+        this.size = Math.random() * 3 + 2;
         this.speedX = Math.random() * 0.5 - 0.25;
         this.speedY = Math.random() * 0.5 - 0.25;
-        this.opacity = Math.random() * 0.5 + 0.2;
+        this.opacity = Math.random() * 0.5 + 0.4;
       }
 
       update() {
@@ -339,15 +503,15 @@
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
 
-        this.opacity += Math.random() * 0.02 - 0.01;
-        if (this.opacity < 0.2) this.opacity = 0.2;
-        if (this.opacity > 0.7) this.opacity = 0.7;
+        this.opacity += Math.random() * 0.01 - 0.005;
+        if (this.opacity < 0.4) this.opacity = 0.4;
+        if (this.opacity > 0.9) this.opacity = 0.9;
       }
 
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(234, 179, 8, ${this.opacity})`;
+        ctx.fillStyle = `rgba(250, 204, 21, ${this.opacity})`;
         ctx.fill();
       }
     }
@@ -360,8 +524,6 @@
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(26, 26, 26, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
       particles.forEach(particle => {
         particle.update();
         particle.draw();
@@ -372,8 +534,16 @@
     init();
     animate();
 
+    // Theme Toggle
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const icon = document.querySelector('.theme-toggle i');
+      icon.classList.toggle('fa-moon');
+      icon.classList.toggle('fa-sun');
+    }
+
     // AOS Initialization
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 800, once: true });
   </script>
 </body>
 </html>
