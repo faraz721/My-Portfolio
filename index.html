@@ -167,41 +167,69 @@
       color: var(--primary-yellow);
       font-size: 1.5rem;
       cursor: pointer;
-      transition: transform 0. cms ease;
+      transition: transform 0.3s ease;
+      position: relative;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .menu-button:hover {
       transform: scale(1.1);
     }
+    .menu-button .fa-bars,
+    .menu-button .phoenician {
+      position: absolute;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .menu-button .fa-bars {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+    .menu-button .phoenician {
+      opacity: 0;
+      transform: rotate(90deg);
+    }
+    .menu-button.active .fa-bars {
+      opacity: 0;
+      transform: rotate(-90deg);
+    }
+    .menu-button.active .phoenician {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
     .dropdown-menu {
       position: absolute;
-      top: 100%;
-      right: 0; /* Align to the right */
+      top: 0;
+      right: 100%;
       background: var(--card-bg);
       border: 1px solid var(--primary-yellow);
       border-radius: 8px;
-      padding: 1rem;
+      padding: 0.5rem 1rem;
       display: none;
-      flex-direction: column;
-      gap: 1rem;
-      min-width: 150px;
+      flex-direction: row; /* Horizontal layout */
+      gap: 1.5rem;
+      min-width: 400px; /* Wider to accommodate horizontal layout */
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateX(10px);
       transition: opacity 0.3s ease, transform 0.3s ease;
       z-index: 50;
     }
     .dropdown-menu.show {
       display: flex;
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
     }
     .dropdown-menu a {
       color: var(--text-color);
       font-weight: 600;
       transition: color 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
     }
     .dropdown-menu a:hover {
       color: var(--primary-yellow);
-      transform: translateX(5px);
+      transform: translateX(-5px);
     }
     .skill-item {
       display: flex;
@@ -245,10 +273,21 @@
         align-items: center;
       }
       .dropdown-menu {
+        min-width: 100%;
+        right: 0;
+        top: 100%;
+        flex-direction: column; /* Revert to vertical on smaller screens */
+        transform: translateY(-10px);
         min-width: 120px;
       }
+      .dropdown-menu.show {
+        transform: translateY(0);
+      }
+      .dropdown-menu a:hover {
+        transform: translateX(5px);
+      }
       .skill-item {
-        max-width: 180px;
+        max-width: 220px;
       }
     }
     @media (max-width: 480px) {
@@ -269,7 +308,7 @@
         min-width: 100px;
       }
       .skill-item {
-        max-width: 150px;
+        max-width: 180px;
       }
     }
   </style>
@@ -279,11 +318,12 @@
   <canvas id="background-animation" aria-hidden="true"></canvas>
 
   <!-- Header -->
-  <header class="w-full z-40">
+  <header class="w-full fixed top-0 z-40">
     <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-end">
       <div class="relative">
         <button class="menu-button" aria-label="Toggle menu">
           <i class="fas fa-bars"></i>
+          <span class="phoenician">𐤕</span>
         </button>
         <div class="dropdown-menu">
           <a href="#hero" class="font-semibold">Home</a>
@@ -305,7 +345,7 @@
             <span>Ahmed</span>
             <span>Faraz</span>
             <span>Malik</span>
-          </h1> <br>
+          </h1><br>
           <p class="my-tagline text-lg md:text-xl mb-6">
             AI-Powered Web & Data Innovator
           </p>
@@ -478,12 +518,14 @@
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
     menuButton.addEventListener('click', () => {
+      menuButton.classList.toggle('active');
       dropdownMenu.classList.toggle('show');
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (event) => {
       if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        menuButton.classList.remove('active');
         dropdownMenu.classList.remove('show');
       }
     });
@@ -491,6 +533,7 @@
     // Close menu when clicking a link
     dropdownMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
+        menuButton.classList.remove('active');
         dropdownMenu.classList.remove('show');
       });
     });
