@@ -22,6 +22,7 @@
       --dark-bg: #171717;
       --card-bg: #262626;
       --text-color: #ffffff;
+      --semi-transparent-bg: rgba(128, 128, 128, 0.3);
     }
     body {
       background: var(--dark-bg);
@@ -30,33 +31,18 @@
       overflow-x: hidden;
       position: relative;
     }
-    .light-mode {
-      --dark-bg: #ffffff;
-      --card-bg: #f3f4f6;
-      --text-color: #000000;
-    }
-    .light-mode .profile-container,
-    .light-mode .skill-item,
-    .light-mode .project-item {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-    .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 50;
+    .profile-container, .skill-item, .project-item {
       background: var(--card-bg);
-      border: 2px solid var(--primary-yellow);
-      border-radius: 50%;
-      padding: 0.5rem;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      border: 1px solid var(--primary-yellow);
+      border-radius: 12px;
+      padding: 0.75rem;
+      max-width: fit-content;
+      margin: 0 auto;
     }
-    .theme-toggle:hover {
-      transform: scale(1.1);
-    }
-    .theme-toggle i {
-      color: var(--primary-yellow);
+    .profile-container:hover, .skill-item:hover, .project-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(250, 204, 21, 0.5);
+      background: rgba(38, 38, 38, 0.9);
     }
     #background-animation {
       position: fixed;
@@ -68,47 +54,22 @@
       pointer-events: none;
       opacity: 0.8;
     }
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary-yellow);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      position: relative;
-      display: inline-block;
-    }
-    .logo::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--primary-yellow);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
     .my-image {
-      border: 4px solid var(--primary-yellow);
-      box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+      border: 3px solid var(--primary-yellow);
+      box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
       object-fit: cover;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .my-image:hover {
       transform: scale(1.27);
-      box-shadow: 0 0 25px rgba(250, 204, 21, 0.7);
+      box-shadow: 0 0 20px rgba(250, 204, 21, 0.7);
     }
     .my-name {
       position: relative;
       display: inline-block;
       transition: transform 0.3s ease;
       color: var(--primary-yellow);
+      white-space: nowrap;
     }
     .my-name:hover {
       transform: scale(1.03);
@@ -148,45 +109,19 @@
       border: 2px solid var(--primary-yellow);
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+      margin-top: 1rem;
     }
     .my-about {
       opacity: 0;
       transform: translateY(20px);
       animation: fade-slide-up 1s ease-out 0.5s forwards;
       color: var(--text-color);
+      background: var(--semi-transparent-bg);
+      padding: 1rem;
+      border-radius: 8px;
     }
     @keyframes fade-slide-up {
       to { opacity: 1; transform: translateY(0); }
-    }
-    .profile-container, .skill-item, .project-item {
-      background: var(--card-bg);
-      border: 1px solid var(--primary-yellow);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .profile-container:hover, .skill-item:hover, .project-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(250, 204, 21, 0.3);
-    }
-    .progress-bar {
-      background: #3f3f3f;
-      border-radius: 9999px;
-      height: 8px;
-      overflow: hidden;
-    }
-    .light-mode .progress-bar {
-      background: #d1d5db;
-    }
-    .progress-fill {
-      background: var(--primary-yellow);
-      height: 100%;
-      transition: width 1s ease-in-out;
-    }
-    .skill-percentage {
-      color: var(--text-color);
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
     }
     .github-btn {
       background: var(--primary-yellow);
@@ -228,29 +163,56 @@
     .contact-link:hover::after {
       opacity: 1;
     }
-    .nav-links a {
-      position: relative;
-      color: var(--text-color);
-      transition: color 0.3s ease;
-    }
-    .nav-links a:hover {
+    .menu-button {
       color: var(--primary-yellow);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0. cms ease;
     }
-    .nav-links a::after {
-      content: '';
+    .menu-button:hover {
+      transform: scale(1.1);
+    }
+    .dropdown-menu {
       position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--primary-yellow);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
+      top: 100%;
+      right: 0; /* Align to the right */
+      background: var(--card-bg);
+      border: 1px solid var(--primary-yellow);
+      border-radius: 8px;
+      padding: 1rem;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 150px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 50;
     }
-    .nav-links a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
+    .dropdown-menu.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      color: var(--text-color);
+      font-weight: 600;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .dropdown-menu a:hover {
+      color: var(--primary-yellow);
+      transform: translateX(5px);
+    }
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 120px;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      margin: 0 auto;
     }
     .project-item p {
       color: var(--text-color);
@@ -264,11 +226,13 @@
     }
     @media (max-width: 768px) {
       .my-image {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
       }
       .my-name {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        white-space: normal;
+        line-height: 1.2;
       }
       .my-tagline {
         font-size: 1.25rem;
@@ -276,36 +240,57 @@
       .my-about {
         font-size: 0.875rem;
       }
-      .nav-links {
-        gap: 1rem;
+      .hero-content {
+        flex-direction: column;
+        align-items: center;
       }
-      .nav-links a {
+      .dropdown-menu {
+        min-width: 120px;
+      }
+      .skill-item {
+        max-width: 180px;
+      }
+    }
+    @media (max-width: 480px) {
+      .my-image {
+        width: 150px;
+        height: 150px;
+      }
+      .my-name {
+        font-size: 1.5rem;
+      }
+      .my-tagline {
         font-size: 1rem;
       }
-      .logo {
-        font-size: 1.2rem;
+      .my-about {
+        font-size: 0.75rem;
+      }
+      .dropdown-menu {
+        min-width: 100px;
+      }
+      .skill-item {
+        max-width: 150px;
       }
     }
   </style>
 </head>
-<body class="transition-colors duration-300">
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
-    <i class="fas fa-moon"></i>
-  </button>
-
+<body>
   <!-- Background Animation Canvas -->
   <canvas id="background-animation" aria-hidden="true"></canvas>
 
   <!-- Header -->
-  <header class="bg-black bg-opacity-80 w-full sticky top-0 z-40">
-    <nav class="max-w-6xl mx-auto px-4 py-4 flex flex-col items-center">
-      <a href="#hero" class="logo">Welcome to My Space on the Web</a>
-      <div class="nav-links flex flex-row justify-center gap-6 mt-2">
-        <a href="#hero" class="font-semibold">Home</a>
-        <a href="#skills" class="font-semibold">Skills</a>
-        <a href="#projects" class="font-semibold">Projects</a>
-        <a href="#contact" class="font-semibold">Contact</a>
+  <header class="w-full z-40">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-end">
+      <div class="relative">
+        <button class="menu-button" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a href="#hero" class="font-semibold">Home</a>
+          <a href="#skills" class="font-semibold">Skills</a>
+          <a href="#projects" class="font-semibold">Projects</a>
+          <a href="#contact" class="font-semibold">Contact</a>
+        </div>
       </div>
     </nav>
   </header>
@@ -314,20 +299,24 @@
   <main>
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center px-4">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-8">
-        <div class="text-center md:text-left mb-8 md:mb-0 md:pr-8">
-          <h1 class="my-name text-4xl md:text-6xl font-bold mb-4">
-            <span>A</span><span>h</span><span>m</span><span>e</span><span>d</span><span> </span>
-            <span>F</span><span>a</span><span>r</span><span>a</span><span>z</span><span> </span>
-            <span>M</span><span>a</span><span>l</span><span>i</span><span>k</span>
-          </h1>
-          <p class="my-tagline text-lg md:text-xl mb-4">AI-Powered Web & Data Innovator</p>
-          <p class="my-about text-base md:text-lg max-w-md mx-auto md:mx-0">
-            I'm a BS IT student at NUML University, Islamabad, driven by a passion for creating impactful web and data solutions. My goal is to leverage AI and modern technologies to solve real-world problems, blending creativity with technical expertise. I thrive on learning, experimenting with new tools, and building projects that make a difference.
+      <div class="max-w-6xl mx-auto flex flex-col items-center w-full gap-6 hero-content">
+        <div class="text-center">
+          <h1 class="my-name text-4xl md:text-6xl font-bold mb-6">
+            <span>Ahmed</span>
+            <span>Faraz</span>
+            <span>Malik</span>
+          </h1> <br>
+          <p class="my-tagline text-lg md:text-xl mb-6">
+            AI-Powered Web & Data Innovator
           </p>
         </div>
         <div class="flex-shrink-0 profile-container text-center">
-          <img src="images/me.jpg" alt="Ahmed Faraz Malik, a BS IT student and developer" class="my-image mx-auto mb-6 rounded-full w-64 h-64 md:w-80 md:h-80">
+          <img src="images/me.jpg" alt="Ahmed Faraz Malik, a BS IT student and developer" class="my-image mx-auto mb-6 rounded-full w-48 h-48 md:w-64 md:h-64">
+        </div>
+        <div class="text-center">
+          <p class="my-about text-base md:text-lg max-w-md mx-auto">
+            I'm a BS Information Technology student at NUML University, Islamabad, with a strong interest in building practical web and data-driven solutions. I aim to apply AI and modern technologies to solve real-world problems by combining creativity with technical skills. I'm passionate about learning, exploring new tools, and developing projects that create a meaningful impact.
+          </p>
         </div>
       </div>
     </section>
@@ -336,80 +325,26 @@
     <section id="skills" class="py-16 bg-black bg-opacity-50">
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12" data-aos="fade-up">Skills</h2>
-        <div class="space-y-12">
-          <!-- Web Development -->
-          <div>
-            <h3 class="text-2xl font-semibold text-yellow-400 mb-6" data-aos="fade-up">Web Development</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="100">
-                <h4 class="text-lg font-semibold text-yellow-400">HTML</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[100%]"></div>
-                </div>
-                <p class="skill-percentage">100%</p>
-              </div>
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="200">
-                <h4 class="text-lg font-semibold text-yellow-400">CSS</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[100%]"></div>
-                </div>
-                <p class="skill-percentage">100%</p>
-              </div>
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="300">
-                <h4 class="text-lg font-semibold text-yellow-400">JavaScript</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[70%]"></div>
-                </div>
-                <p class="skill-percentage">70%</p>
-              </div>
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="100">
+            <h4 class="text-lg font-semibold text-yellow-400">Web Development</h4>
+            <p class="text-white">Expert</p>
           </div>
-          <!-- Data & Backend -->
-          <div>
-            <h3 class="text-2xl font-semibold text-yellow-400 mb-6" data-aos="fade-up">Data & Backend</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="100">
-                <h4 class="text-lg font-semibold text-yellow-400">Python</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[90%]"></div>
-                </div>
-                <p class="skill-percentage">90%</p>
-              </div>
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="200">
-                <h4 class="text-lg font-semibold text-yellow-400">SQL</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[85%]"></div>
-                </div>
-                <p class="skill-percentage">85%</p>
-              </div>
-            </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="200">
+            <h4 class="text-lg font-semibold text-yellow-400">App Development</h4>
+            <p class="text-white">Beginner</p>
           </div>
-          <!-- Mobile Development -->
-          <div>
-            <h3 class="text-2xl font-semibold text-yellow-400 mb-6" data-aos="fade-up">Mobile Development</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="100">
-                <h4 class="text-lg font-semibold text-yellow-400">Java</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[70%]"></div>
-                </div>
-                <p class="skill-percentage">70%</p>
-              </div>
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="200">
-                <h4 class="text-lg font-semibold text-yellow-400">XML</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[70%]"></div>
-                </div>
-                <p class="skill-percentage">70%</p>
-              </div>
-              <div class="skill-item p-6" data-aos="zoom-in" data-aos-delay="300">
-                <h4 class="text-lg font-semibold text-yellow-400">Android Studio</h4>
-                <div class="progress-bar mt-2">
-                  <div class="progress-fill w-[100%]"></div>
-                </div>
-                <p class="skill-percentage">100%</p>
-              </div>
-            </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="300">
+            <h4 class="text-lg font-semibold text-yellow-400">Python Programming</h4>
+            <p class="text-white">Expert</p>
+          </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="100">
+            <h4 class="text-lg font-semibold text-yellow-400">Artificial Intelligence</h4>
+            <p class="text-white">Expert</p>
+          </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="200">
+            <h4 class="text-lg font-semibold text-yellow-400">SQL</h4>
+            <p class="text-white">Expert</p>
           </div>
         </div>
       </div>
@@ -446,6 +381,7 @@
     <section id="contact" class="py-16 bg-black bg-opacity-50">
       <div class="max-w-6xl mx-auto px-4 text-center">
         <h2 class="text-4xl font-bold text-yellow-400 mb-12" data-aos="fade-up">Contact Me</h2>
+        <p class="text-lg text-white mb-6">Click an icon to connect with me</p>
         <div class="flex justify-center space-x-12" data-aos="zoom-in" data-aos-delay="100">
           <a href="mailto:721ahmedfarazmalik@gmail.com" class="contact-link text-3xl" data-tooltip="Email" target="_blank" rel="noopener noreferrer" aria-label="Email Ahmed Faraz Malik">
             <i class="fas fa-envelope"></i>
@@ -534,16 +470,30 @@
     init();
     animate();
 
-    // Theme Toggle
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      const icon = document.querySelector('.theme-toggle i');
-      icon.classList.toggle('fa-moon');
-      icon.classList.toggle('fa-sun');
-    }
-
     // AOS Initialization
     AOS.init({ duration: 800, once: true });
+
+    // Menu Toggle
+    const menuButton = document.querySelector('.menu-button');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    menuButton.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    // Close menu when clicking a link
+    dropdownMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        dropdownMenu.classList.remove('show');
+      });
+    });
   </script>
 </body>
 </html>
