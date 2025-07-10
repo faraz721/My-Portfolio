@@ -9,7 +9,7 @@
   <!-- AOS for Scroll Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- Font Awesome for Contact Icons and Hamburger -->
+  <!-- Font Awesome for Contact Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,44 +18,18 @@
       background: #1a1a1a;
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
-    }
-    /* Blinking Stars Animation for Navbar */
-    nav {
       position: relative;
-      overflow: hidden;
     }
-    nav::before {
-      content: '';
-      position: absolute;
+    /* Portfolio Background Animation */
+    #background-animation {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: transparent;
       z-index: -1;
       pointer-events: none;
     }
-    .star {
-      position: absolute;
-      background: #eab308;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: twinkle 2s infinite ease-in-out;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-    .star:nth-child(1) { top: 10%; left: 5%; width: 2px; height: 2px; animation-delay: 0.2s; }
-    .star:nth-child(2) { top: 30%; left: 15%; width: 3px; height: 3px; animation-delay: 0.5s; }
-    .star:nth-child(3) { top: 50%; left: 25%; width: 1px; height: 1px; animation-delay: 0.8s; }
-    .star:nth-child(4) { top: 20%; left: 35%; width: 2px; height: 2px; animation-delay: 1s; }
-    .star:nth-child(5) { top: 40%; left: 45%; width: 3px; height: 3px; animation-delay: 0.3s; }
-    .star:nth-child(6) { top: 60%; left: 55%; width: 2px; height: 2px; animation-delay: 0.6s; }
-    .star:nth-child(7) { top: 15%; left: 65%; width: 1px; height: 1px; animation-delay: 0.9s; }
-    .star:nth-child(8) { top: 35%; left: 75%; width: 2px; height: 2px; animation-delay: 0.4s; }
-    .star:nth-child(9) { top: 55%; left: 85%; width: 3px; height: 3px; animation-delay: 0.7s; }
-    .star:nth-child(10) { top: 25%; left: 95%; width: 1px; height: 1px; animation-delay: 0.1s; }
     .my-image {
       animation: image-pop 1.5s ease-in-out forwards;
       border: 5px solid #eab308;
@@ -170,29 +144,18 @@
       color: #eab308;
       filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.7));
     }
-    /* Hamburger Menu */
-    .hamburger {
-      cursor: pointer;
-    }
+    /* Navigation Links */
     .nav-links {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 64px;
-      left: 0;
-      right: 0;
-      background: #1a1a1a;
-      padding: 1rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .nav-links.active {
       display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
     }
     .nav-links a {
-      margin: 0.5rem 0;
       font-size: 1.2rem;
       color: white;
+      transition: color 0.3s ease;
     }
     .nav-links a:hover {
       color: #eab308;
@@ -211,19 +174,23 @@
       .my-about {
         font-size: 1rem;
       }
+      .nav-links {
+        gap: 1rem;
+      }
+      .nav-links a {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Background Animation Canvas -->
+  <canvas id="background-animation"></canvas>
+
   <!-- Navbar -->
-  <nav class="bg-black bg-opacity-80 fixed w-full top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="text-2xl font-bold text-yellow-400">Ahmed Faraz Malik</div>
-      <div class="hamburger text-yellow-400 text-2xl">
-        <i class="fas fa-bars"></i>
-      </div>
+  <nav class="bg-black bg-opacity-80 w-full">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col items-center">
+      <div class="text-2xl font-bold text-yellow-400 text-center">Welcome to My Portfolio</div>
       <div class="nav-links">
         <a href="#hero">Home</a>
         <a href="#skills">Skills</a>
@@ -262,7 +229,7 @@
         </div>
         <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="200">
           <h3 class="text-xl font-bold text-yellow-400">CSS</h3>
-          <p class="text-gray-300">Creating stylish, responsive designs</p>
+          <p class="text-gray-300"><?= $Creating stylish, responsive designs</p>
         </div>
         <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="300">
           <h3 class="text-xl font-bold text-yellow-400">JavaScript</h3>
@@ -309,33 +276,29 @@
   </section>
 
   <!-- Contact Section -->
-<section id="contact" class="contact py-16 bg-black bg-opacity-50">
-  <div class="max-w-6xl mx-auto px-4 text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-yellow-400 mb-10">Contact Me</h2>
-    <div class="flex justify-center space-x-8" data-aos="zoom-in" data-aos-delay="100">
-      <!-- Email -->
-      <a href="mailto:721ahmedfarazmalik@gmail.com" class="contact-link text-4xl text-gray-300" title="Email">
-        <i class="fas fa-envelope"></i>
-      </a>
-
-      <!-- WhatsApp -->
-      <a href="https://wa.me/923151512720" class="contact-link text-4xl text-gray-300" title="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com/in/ahmed-faraz-malik-88b635319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-link text-4xl text-gray-300" title="LinkedIn" target="_blank">
-        <i class="fab fa-linkedin"></i>
-      </a>
-
-      <!-- GitHub -->
-      <a href="https://github.com/faraz721" class="contact-link text-4xl text-gray-300" title="GitHub" target="_blank">
-        <i class="fab fa-github"></i>
-      </a>
+  <section id="contact" class="contact py-16 bg-black bg-opacity-50">
+    <div class="max-w-6xl mx-auto px-4 text-center" data-aos="fade-up">
+      <h2 class="text-4xl font-bold text-yellow-400 mb-10">Contact Me</h2>
+      <div class="flex justify-center space-x-8" data-aos="zoom-in" data-aos-delay="100">
+        <!-- Email -->
+        <a href="mailto:721ahmedfarazmalik@gmail.com" class="contact-link text-4xl text-gray-300" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/923151512720" class="contact-link text-4xl text-gray-300" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/ahmed-faraz-malik-88b635319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-link text-4xl text-gray-300" title="LinkedIn" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/faraz721" class="contact-link text-4xl text-gray-300" title="GitHub" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Footer -->
   <footer class="py-6 bg-black bg-opacity-80 text-center">
@@ -344,10 +307,72 @@
 
   <!-- Scripts -->
   <script>
-    // Hamburger Menu Toggle
-    document.querySelector('.hamburger').addEventListener('click', () => {
-      document.querySelector('.nav-links').classList.toggle('active');
+    // Background Animation
+    const canvas = document.getElementById('background-animation');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
+
+    const particles = [];
+    const numParticles = 50;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+        this.opacity += Math.random() * 0.02 - 0.01;
+        if (this.opacity < 0.2) this.opacity = 0.2;
+        if (this.opacity > 0.7) this.opacity = 0.7;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(234, 179, 8, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      for (let i = 0; i < numParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(26, 26, 26, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    // AOS Initialization
     AOS.init({ duration: 1000 });
   </script>
 </body>
