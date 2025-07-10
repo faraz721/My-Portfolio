@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Faraz Malik - Portfolio</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS for Scroll Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Font Awesome for Contact Icons and Hamburger -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #1a1a1a;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+    /* Blinking Stars Animation for Navbar */
+    nav {
+      position: relative;
+      overflow: hidden;
+    }
+    nav::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      background: #eab308;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .star:nth-child(1) { top: 10%; left: 5%; width: 2px; height: 2px; animation-delay: 0.2s; }
+    .star:nth-child(2) { top: 30%; left: 15%; width: 3px; height: 3px; animation-delay: 0.5s; }
+    .star:nth-child(3) { top: 50%; left: 25%; width: 1px; height: 1px; animation-delay: 0.8s; }
+    .star:nth-child(4) { top: 20%; left: 35%; width: 2px; height: 2px; animation-delay: 1s; }
+    .star:nth-child(5) { top: 40%; left: 45%; width: 3px; height: 3px; animation-delay: 0.3s; }
+    .star:nth-child(6) { top: 60%; left: 55%; width: 2px; height: 2px; animation-delay: 0.6s; }
+    .star:nth-child(7) { top: 15%; left: 65%; width: 1px; height: 1px; animation-delay: 0.9s; }
+    .star:nth-child(8) { top: 35%; left: 75%; width: 2px; height: 2px; animation-delay: 0.4s; }
+    .star:nth-child(9) { top: 55%; left: 85%; width: 3px; height: 3px; animation-delay: 0.7s; }
+    .star:nth-child(10) { top: 25%; left: 95%; width: 1px; height: 1px; animation-delay: 0.1s; }
+    .my-image {
+      animation: image-pop 1.5s ease-in-out forwards;
+      border: 5px solid #eab308;
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+      object-fit: cover;
+    }
+    @keyframes image-pop {
+      0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+      60% { transform: scale(1.05) rotate(3deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+    .my-name {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .my-name:hover {
+      transform: scale(1.05);
+    }
+    .my-name::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #eab308, transparent);
+    }
+    .my-name span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(-20px) rotate(-10deg);
+      animation: letter-slide 1.2s ease-in-out forwards;
+    }
+    @keyframes letter-slide {
+      0% { opacity: 0; transform: translateX(-20px) rotate(-10deg); }
+      60% { transform: translateX(5px) rotate(3deg); }
+      100% { opacity: 1; transform: translateX(0) rotate(0); }
+    }
+    .my-name span:nth-child(1) { animation-delay: 0.05s; }
+    .my-name span:nth-child(2) { animation-delay: 0.1s; }
+    .my-name span:nth-child(3) { animation-delay: 0.15s; }
+    .my-name span:nth-child(4) { animation-delay: 0.2s; }
+    .my-name span:nth-child(5) { animation-delay: 0.25s; }
+    .my-name span:nth-child(6) { animation-delay: 0.3s; }
+    .my-name span:nth-child(7) { animation-delay: 0.35s; }
+    .my-name span:nth-child(8) { animation-delay: 0.4s; }
+    .my-name span:nth-child(9) { animation-delay: 0.45s; }
+    .my-name span:nth-child(10) { animation-delay: 0.5s; }
+    .my-name span:nth-child(11) { animation-delay: 0.55s; }
+    .my-name span:nth-child(12) { animation-delay: 0.6s; }
+    .my-name span:nth-child(13) { animation-delay: 0.65s; }
+    .my-name span:nth-child(14) { animation-delay: 0.7s; }
+    .my-name span:nth-child(15) { animation-delay: 0.75s; }
+    .my-name span:nth-child(16) { animation-delay: 0.8s; }
+    .my-tagline {
+      animation: fade-slide-up 1s ease-in-out 0.5s forwards;
+      opacity: 0;
+      transition: transform 0.3s ease;
+    }
+    .my-tagline:hover {
+      transform: scale(1.05);
+    }
+    @keyframes fade-slide-up {
+      0% { opacity: 0; transform: translateY(20px); }
+      60% { transform: translateY(-5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .my-about {
+      animation: slide-right 1s ease-in-out 0.7s forwards;
+      opacity: 0;
+      transition: transform 0.3s ease;
+    }
+    .my-about:hover {
+      transform: scale(1.03);
+    }
+    @keyframes slide-right {
+      0% { opacity: 0; transform: translateX(20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    .profile-container {
+      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+      border: 2px solid #eab308;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: box-shadow 0.3s ease;
+    }
+    .profile-container:hover {
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+    }
+    .skill-item, .project-item {
+      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skill-item:hover, .project-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(234, 179, 8, 0.4);
+    }
+    .github-btn {
+      transition: all 0.3s ease;
+    }
+    .github-btn:hover {
+      background-color: #eab308;
+      transform: scale(1.15);
+      box-shadow: 0 5px 15px rgba(234, 179, 8, 0.6);
+    }
+    .contact-link {
+      transition: all 0.3s ease;
+    }
+    .contact-link:hover {
+      transform: scale(1.4) rotate(10deg);
+      color: #eab308;
+      filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.7));
+    }
+    /* Hamburger Menu */
+    .hamburger {
+      cursor: pointer;
+    }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: #1a1a1a;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .nav-links.active {
+      display: flex;
+    }
+    .nav-links a {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+      color: white;
+    }
+    .nav-links a:hover {
+      color: #eab308;
+    }
+    @media (max-width: 768px) {
+      .my-image {
+        width: 250px;
+        height: 250px;
+      }
+      .my-name {
+        font-size: 2.5rem;
+      }
+      .my-tagline {
+        font-size: 1.25rem;
+      }
+      .my-about {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="bg-black bg-opacity-80 fixed w-full top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
+      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+      <div class="text-2xl font-bold text-yellow-400">Ahmed Faraz Malik</div>
+      <div class="hamburger text-yellow-400 text-2xl">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full">
+      <div class="text-center md:text-left mb-8 md:mb-0 md:pr-8">
+        <h1 class="my-name text-5xl md:text-7xl font-bold text-yellow-400 mb-4">
+          <span>A</span><span>h</span><span>m</span><span>e</span><span>d</span><span> </span>
+          <span>F</span><span>a</span><span>r</span><span>a</span><span>z</span><span> </span>
+          <span>M</span><span>a</span><span>l</span><span>i</span><span>k</span>
+        </h1>
+        <p class="my-tagline text-xl md:text-2xl text-gray-300">AI-Powered Web & Data Innovator</p>
+      </div>
+      <div class="flex-shrink-0 profile-container text-center">
+        <img src="images/me.jpg" alt="Ahmed Faraz Malik" class="my-image mx-auto mb-6 rounded-full w-80 h-80 md:w-[350px] md:h-[350px]">
+        <p class="my-about text-lg text-gray-300 max-w-xs mx-auto">BS IT student at NUML University, Islamabad, passionate about crafting innovative web and data solutions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills py-16 bg-black bg-opacity-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-yellow-400 mb-10" data-aos="fade-up">Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="100">
+          <h3 class="text-xl font-bold text-yellow-400">HTML</h3>
+          <p class="text-gray-300">Building clean, accessible web layouts</p>
+        </div>
+        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="200">
+          <h3 class="text-xl font-bold text-yellow-400">CSS</h3>
+          <p class="text-gray-300">Creating stylish, responsive designs</p>
+        </div>
+        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="300">
+          <h3 class="text-xl font-bold text-yellow-400">JavaScript</h3>
+          <p class="text-gray-300">Adding dynamic, interactive features</p>
+        </div>
+        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="400">
+          <h3 class="text-xl font-bold text-yellow-400">SQL</h3>
+          <p class="text-gray-300">Managing databases efficiently</p>
+        </div>
+        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="500">
+          <h3 class="text-xl font-bold text-yellow-400">Python</h3>
+          <p class="text-gray-300">Developing backend and data solutions</p>
+        </div>
+        <div class="skill-item p-6 rounded-lg text-center" data-aos="zoom-in" data-aos-delay="600">
+          <h3 class="text-xl font-bold text-yellow-400">Mobile App Development</h3>
+          <p class="text-gray-300">Beginner in building mobile applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-yellow-400 mb-10" data-aos="fade-up">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="project-item p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-2xl font-bold text-yellow-400">Bulkwise Emailer</h3>
+          <p class="text-gray-300 mt-2">Bulk email tool with templates & analytics</p>
+          <a href="https://github.com/faraz721/Bulkwise_Emailer.git" class="github-btn inline-block mt-4 bg-yellow-400 text-black font-bold py-2 px-4 rounded">GitHub</a>
+        </div>
+        <div class="project-item p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-2xl font-bold text-yellow-400">QuickLook AI</h3>
+          <p class="text-gray-300 mt-2">AI-driven data analysis & visualization</p>
+          <a href="https://github.com/faraz721/QuickLook_AI.git" class="github-btn inline-block mt-4 bg-yellow-400 text-black font-bold py-2 px-4 rounded">GitHub</a>
+        </div>
+        <div class="project-item p-6 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-2xl font-bold text-yellow-400">DonorPoint</h3>
+          <p class="text-gray-300 mt-2">Connecting donors with charities</p>
+          <a href="https://github.com/faraz721/donorpoint.git" class="github-btn inline-block mt-4 bg-yellow-400 text-black font-bold py-2 px-4 rounded">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+<section id="contact" class="contact py-16 bg-black bg-opacity-50">
+  <div class="max-w-6xl mx-auto px-4 text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-yellow-400 mb-10">Contact Me</h2>
+    <div class="flex justify-center space-x-8" data-aos="zoom-in" data-aos-delay="100">
+      <!-- Email -->
+      <a href="mailto:721ahmedfarazmalik@gmail.com" class="contact-link text-4xl text-gray-300" title="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/923151512720" class="contact-link text-4xl text-gray-300" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/ahmed-faraz-malik-88b635319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-link text-4xl text-gray-300" title="LinkedIn" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/faraz721" class="contact-link text-4xl text-gray-300" title="GitHub" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="py-6 bg-black bg-opacity-80 text-center">
+    <p class="text-gray-300">© 2025 Ahmed Faraz Malik. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Hamburger Menu Toggle
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    AOS.init({ duration: 1000 });
+  </script>
+</body>
+</html>
