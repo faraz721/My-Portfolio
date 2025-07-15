@@ -99,7 +99,7 @@
     .my-name span:nth-child(14) { animation-delay: 0.7s; }
     .my-name span:nth-child(15) { animation-delay: 0.75s; }
     .my-name span:nth-child(16) { animation-delay: 0.8s; }
-    .my-tagline {
+   .my-tagline, .cv-btn {
       opacity: 0;
       transform: translateY(20px);
       animation: fade-slide-up 1s ease-out 0.5s forwards;
@@ -123,7 +123,7 @@
     @keyframes fade-slide-up {
       to { opacity: 1; transform: translateY(0); }
     }
-    .github-btn {
+    .github-btn, .cv-btn {
       background: var(--primary-yellow);
       color: #1f2937;
       font-weight: 600;
@@ -131,7 +131,7 @@
       border-radius: 8px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .github-btn:hover {
+    .github-btn:hover, .cv-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(250, 204, 21, 0.5);
     }
@@ -208,9 +208,9 @@
       border-radius: 8px;
       padding: 0.5rem 1rem;
       display: none;
-      flex-direction: row; /* Horizontal layout */
+      flex-direction: row;
       gap: 1.5rem;
-      min-width: 400px; /* Wider to accommodate horizontal layout */
+      min-width: 400px;
       opacity: 0;
       transform: translateX(10px);
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -276,7 +276,7 @@
         min-width: 100%;
         right: 0;
         top: 100%;
-        flex-direction: column; /* Revert to vertical on smaller screens */
+        flex-direction: column;
         transform: translateY(-10px);
         min-width: 120px;
       }
@@ -346,9 +346,10 @@
             <span>Faraz</span>
             <span>Malik</span>
           </h1><br>
-          <p class="my-tagline text-lg md:text-xl mb-6">
-            AI-Powered Web & Data Innovator
+          <p class="my-tagline text-lg md:text-xl mb-4">
+            AI Engineer & Web Developer
           </p>
+          <a href="assets/Ahmed_Faraz_Malik_Resume.pdf" download class="cv-btn inline-block" aria-label="Download Ahmed Faraz Malik's Resume">Download CV</a>
         </div>
         <div class="flex-shrink-0 profile-container text-center">
           <img src="images/me.jpg" alt="Ahmed Faraz Malik, a BS IT student and developer" class="my-image mx-auto mb-6 rounded-full w-48 h-48 md:w-64 md:h-64">
@@ -360,8 +361,7 @@
         </div>
       </div>
     </section>
-
-    <!-- Skills Section -->
+<!-- Skills Section -->
     <section id="skills" class="py-16 bg-black bg-opacity-50">
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12" data-aos="fade-up">Skills</h2>
@@ -386,32 +386,39 @@
             <h4 class="text-lg font-semibold text-yellow-400">SQL</h4>
             <p class="text-white">Expert</p>
           </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="300">
+            <h4 class="text-lg font-semibold text-yellow-400">Database Management</h4>
+            <p class="text-white">Expert</p>
+          </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="100">
+            <h4 class="text-lg font-semibold text-yellow-400">Version Control (Git & GitHub)</h4>
+            <p class="text-white">Expert</p>
+          </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="200">
+            <h4 class="text-lg font-semibold text-yellow-400">Data Analysis & Visualization</h4>
+            <p class="text-white">Expert</p>
+          </div>
+          <div class="skill-item" data-aos="zoom-in" data-aos-delay="300">
+            <h4 class="text-lg font-semibold text-yellow-400">Machine Learning</h4>
+            <p class="text-white">Expert</p>
+          </div>
         </div>
       </div>
     </section>
-
     <!-- Projects Section -->
     <section id="projects" class="py-16">
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12" data-aos="fade-up">Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="project-item p-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="text-2xl font-bold text-yellow-400">DonorPoint</h3>
-            <p class="text-gray-300 mt-2">A simple web app that helps people find nearby blood donors. Users can register, request blood by type, and search donors. Admins can manage users and requests through a separate panel.</p>
-            <p class="text-gray-400 mt-2 text-sm"><strong>Technologies:</strong> HTML, CSS, JavaScript, PHP, MySQL</p>
-            <a href="https://github.com/faraz721/donorpoint.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <h3 class="text-2xl font-bold text-yellow-400">BulkWise Emailer</h3>
+            <p class="text-gray-300 mt-2">Developed a web-based application to send customized bulk emails. Users can upload a CSV contact list, write a message, and send emails instantly through a simple and responsive interface. Enabled CSV upload for easy contact management, streamlined the email sending process with real-time feedback, and designed a clean, user-friendly web UI suitable for email campaigns and announcements.</p>
+            <a href="https://github.com/faraz721/Bulkwise_Emailer.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
           <div class="project-item p-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="text-2xl font-bold text-yellow-400">QuickLook_AI</h3>
-            <p class="text-gray-300 mt-2">A research tool that shows the top 3 Google search results using the Serper API. It's fast, minimal, and built with a clean Streamlit interface — perfect for quick lookups.</p>
-            <p class="text-gray-400 mt-2 text-sm"><strong>Technologies:</strong> Python, Streamlit, Serper.dev API, requests, python-dotenv</p>
-            <a href="https://github.com/faraz721/QuickLook_AI.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-          <div class="project-item p-6" data-aos="fade-up" data-aos-delay="300">
-            <h3 class="text-2xl font-bold text-yellow-400">BulkWise Emailer</h3>
-            <p class="text-gray-300 mt-2">A desktop app to send customized bulk emails. Users can import a CSV contact list, write a message, and send emails with one click. Simple UI and very handy for campaigns or updates.</p>
-            <p class="text-gray-400 mt-2 text-sm"><strong>Technologies:</strong> Python, Tkinter, smtplib, email, pandas</p>
-            <a href="https://github.com/faraz721/Bulkwise_Emailer.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <h3 class="text-2xl font-bold text-yellow-400">Blood Donor System</h3>
+            <p class="text-gray-300 mt-2">Developed DonorPoint, a web-based blood donation management system to connect donors with those in need. Features a responsive interface for donor registration, search, and admin management, hosted locally with XAMPP and version-controlled on GitHub. Includes donor registration and search by blood group/location, an admin dashboard for CRUD operations, and responsive design with CSS animations and hover effects.</p>
+            <a href="https://github.com/faraz721/blood-donor-system.git" class="github-btn inline-block mt-4" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
       </div>
